@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Linktree · Premium Landing Page</title>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet"/>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -13,9 +13,21 @@
             box-sizing: border-box;
             font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
         }
+        html {
+            /* Belt-and-braces: stop any stray element from creating side-scroll */
+            max-width: 100%;
+            overflow-x: hidden;
+        }
         body {
             background: #f5f7f0;
+            max-width: 100%;
             overflow-x: hidden;
+        }
+
+        /* Safety net so no media element can ever force horizontal scroll */
+        img, video {
+            max-width: 100%;
+            height: auto;
         }
 
         /* Smooth Scroll Behavior */
@@ -61,13 +73,14 @@
             box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
         }
         .logo {
-            font-size: 24px;
+            font-size: clamp(16px, 4vw, 24px);
             font-weight: 700;
             display: flex;
             align-items: center;
             gap: 8px;
             color: #1e2a3a;
             text-decoration: none;
+            white-space: nowrap;
         }
         .logo i {
             font-size: 26px;
@@ -154,7 +167,8 @@
             position: fixed;
             top: 0;
             left: -100%;
-            width: 300px;
+            width: min(300px, 82vw);
+            max-width: 100%;
             height: 100vh;
             background: white;
             box-shadow: 4px 0 30px rgba(0,0,0,0.1);
@@ -164,6 +178,7 @@
             display: flex;
             flex-direction: column;
             gap: 25px;
+            overflow-y: auto;
         }
         .mobile-nav.open {
             left: 0;
@@ -242,16 +257,17 @@
         }
         .hero-text {
             flex: 1;
+            min-width: 0;
         }
         .hero-title {
-            font-size: 80px;
+            font-size: clamp(32px, 6vw + 1rem, 80px);
             color: #254f1a;
             line-height: 1.1;
             font-weight: 700;
         }
         .hero-subtitle {
             font-weight: 400;
-            font-size: 22px;
+            font-size: clamp(15px, 1.6vw + 0.6rem, 22px);
             color: #1e2a3a;
             line-height: 1.6;
             margin-top: 20px;
@@ -267,12 +283,15 @@
         .hero-input-group input {
             height: 55px;
             width: 240px;
+            max-width: 100%;
+            flex: 1 1 200px;
             border-radius: 8px;
             border: 2px solid rgba(255,255,255,0.5);
             padding: 0 20px;
             font-size: 18px;
             background: rgba(255,255,255,0.9);
             transition: all 0.3s ease;
+            min-width: 0;
         }
         .hero-input-group input:focus {
             outline: none;
@@ -292,6 +311,7 @@
             cursor: pointer;
             transition: all 0.3s ease;
             white-space: nowrap;
+            flex: 1 1 200px;
         }
         .btn-primary:hover {
             background: #1d3f14;
@@ -300,6 +320,7 @@
         }
         .hero-image {
             flex: 0 0 45%;
+            min-width: 0;
             text-align: center;
         }
         .hero-image img {
@@ -335,19 +356,21 @@
             max-width: 600px;
             width: 100%;
             border-radius: 24px;
+            min-width: 0;
         }
         .create-content {
             flex: 1;
+            min-width: 0;
         }
         .section-title-light {
-            font-size: 56px;
+            font-size: clamp(28px, 4.5vw + 0.5rem, 56px);
             color: #d2e823;
             font-weight: 700;
             line-height: 1.2;
         }
         .section-desc-light {
             color: white;
-            font-size: 20px;
+            font-size: clamp(16px, 1.4vw + 0.6rem, 20px);
             font-weight: 400;
             line-height: 1.6;
             margin: 24px 0 32px;
@@ -363,6 +386,7 @@
             font-size: 18px;
             cursor: pointer;
             transition: all 0.3s ease;
+            max-width: 100%;
         }
         .btn-secondary:hover {
             background: #c0d91e;
@@ -384,7 +408,7 @@
             width: 100%;
         }
         .section-title-dark {
-            font-size: 64px;
+            font-size: clamp(30px, 5vw + 0.5rem, 64px);
             color: #e9c0e9;
             font-weight: 700;
             line-height: 1.2;
@@ -397,10 +421,11 @@
         }
         .share-text {
             flex: 1;
+            min-width: 0;
         }
         .section-desc-dark {
             color: white;
-            font-size: 22px;
+            font-size: clamp(16px, 1.6vw + 0.6rem, 22px);
             font-weight: 400;
             line-height: 1.6;
             max-width: 580px;
@@ -416,6 +441,7 @@
             cursor: pointer;
             margin-top: 30px;
             transition: all 0.3s ease;
+            max-width: 100%;
         }
         .btn-pink:hover {
             background: #dbaedb;
@@ -424,6 +450,7 @@
         }
         .share-video {
             flex: 0 0 45%;
+            min-width: 0;
         }
         .share-video video {
             width: 100%;
@@ -449,6 +476,7 @@
         }
         .analytics-image {
             flex: 0 0 45%;
+            min-width: 0;
         }
         .analytics-image img {
             width: 100%;
@@ -457,15 +485,16 @@
         }
         .analytics-content {
             flex: 1;
+            min-width: 0;
         }
         .analytics-content h2 {
-            font-size: 48px;
+            font-size: clamp(26px, 4vw + 0.5rem, 48px);
             color: #1e2330;
             line-height: 1.2;
             font-weight: 700;
         }
         .analytics-content p {
-            font-size: 20px;
+            font-size: clamp(16px, 1.4vw + 0.6rem, 20px);
             color: #1e2330;
             margin: 24px 0 32px;
             line-height: 1.6;
@@ -481,6 +510,7 @@
             font-size: 18px;
             cursor: pointer;
             transition: all 0.3s ease;
+            max-width: 100%;
         }
         .btn-analytics:hover {
             background: #e0b0e0;
@@ -506,13 +536,13 @@
             padding: 0 20px;
         }
         .gallery-header h2 {
-            font-size: 56px;
+            font-size: clamp(28px, 5vw + 0.5rem, 56px);
             color: white;
             font-weight: 700;
             margin-bottom: 10px;
         }
         .gallery-header p {
-            font-size: 20px;
+            font-size: clamp(15px, 1.4vw + 0.6rem, 20px);
             color: rgba(255,255,255,0.7);
             max-width: 600px;
             margin: 0 auto;
@@ -620,6 +650,7 @@
         /* Duplicate track for seamless loop */
         .gallery-wrapper {
             width: 100%;
+            max-width: 100%;
             overflow: hidden;
             position: relative;
         }
@@ -661,15 +692,16 @@
         }
         .extra-text {
             flex: 1;
+            min-width: 0;
         }
         .extra-text h2 {
-            font-size: 56px;
+            font-size: clamp(28px, 5vw + 0.5rem, 56px);
             color: white;
             font-weight: 700;
             line-height: 1.2;
         }
         .extra-text p {
-            font-size: 22px;
+            font-size: clamp(16px, 1.6vw + 0.6rem, 22px);
             color: rgba(255,255,255,0.9);
             margin: 24px 0 32px;
             line-height: 1.6;
@@ -677,6 +709,7 @@
         }
         .extra-card {
             flex: 0 0 45%;
+            min-width: 0;
             background: rgba(255,255,255,0.15);
             backdrop-filter: blur(10px);
             padding: 50px;
@@ -685,13 +718,13 @@
         }
         .extra-card h3 {
             color: white;
-            font-size: 32px;
+            font-size: clamp(24px, 3vw + 0.5rem, 32px);
             margin-bottom: 20px;
         }
         .extra-card ul {
             list-style: none;
             color: rgba(255,255,255,0.9);
-            font-size: 20px;
+            font-size: clamp(16px, 1.4vw + 0.5rem, 20px);
             line-height: 2.2;
         }
         .extra-card ul li::before {
@@ -709,7 +742,7 @@
             max-width: 1400px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
             gap: 40px;
         }
         .footer-column h4 {
@@ -755,12 +788,6 @@
 
         /* Responsive */
         @media screen and (max-width: 1024px) {
-            .hero-title { font-size: 60px; }
-            .section-title-light { font-size: 44px; }
-            .section-title-dark { font-size: 50px; }
-            .analytics-content h2 { font-size: 38px; }
-            .extra-text h2 { font-size: 44px; }
-            .gallery-header h2 { font-size: 44px; }
             .create-container, .share-content, .analytics-container, .extra-container {
                 gap: 40px;
             }
@@ -770,76 +797,63 @@
             .nav-links, .nav-actions { display: none; }
             .hamburger { display: block; }
             .navbar { height: 65px; padding: 0 20px; top: 15px; width: 95%; }
-            .logo { font-size: 20px; }
             .hero { padding: 100px 20px 40px; }
             .hero-container { flex-direction: column; }
             .hero-image { flex: 0 0 100%; }
             .hero-image img { max-width: 400px; }
-            .hero-title { font-size: 44px; }
-            .hero-subtitle { font-size: 18px; }
-            .hero-input-group input { width: 200px; height: 48px; font-size: 16px; }
+            .hero-input-group input { height: 48px; }
             .btn-primary { height: 48px; padding: 0 30px; font-size: 16px; }
             .section-create { padding: 50px 20px; }
             .create-container { flex-direction: column; }
             .create-container video { flex: 0 0 100%; max-width: 100%; }
-            .section-title-light { font-size: 36px; }
-            .section-desc-light { font-size: 18px; }
             .section-share { padding: 50px 20px; }
-            .section-title-dark { font-size: 38px; }
             .share-content { flex-direction: column; }
-            .share-video { flex: 0 0 100%; }
-            .section-desc-dark { font-size: 18px; max-width: 100%; }
+            .share-video { flex: 0 0 100%; width: 100%; }
+            .section-desc-dark { max-width: 100%; }
             .section-analytics { padding: 50px 20px; }
             .analytics-container { flex-direction: column; }
-            .analytics-image { flex: 0 0 100%; }
-            .analytics-content h2 { font-size: 32px; }
-            .analytics-content p { font-size: 18px; }
+            .analytics-image { flex: 0 0 100%; width: 100%; }
             .section-gallery { padding: 60px 0; }
-            .gallery-header h2 { font-size: 36px; }
-            .gallery-header p { font-size: 18px; }
-            .gallery-item { min-width: 200px; height: 280px; }
+            .gallery-item { min-width: 220px; height: 300px; }
             .section-extra { padding: 50px 20px; }
             .extra-container { flex-direction: column; }
-            .extra-card { flex: 0 0 100%; padding: 30px; }
-            .extra-text h2 { font-size: 36px; }
-            .extra-text p { font-size: 18px; }
+            .extra-card { flex: 0 0 100%; width: 100%; padding: 30px; }
             .footer { padding: 40px 20px 20px; }
             .gallery-wrapper::before,
-            .gallery-wrapper::after { width: 50px; }
+            .gallery-wrapper::after { width: 60px; }
+        }
+        @media screen and (max-width: 600px) {
+            .hero-input-group { flex-direction: column; align-items: stretch; }
+            .hero-input-group input,
+            .hero-input-group .btn-primary {
+                width: 100%;
+                flex: 1 1 auto;
+            }
+            .gallery-item { min-width: 200px; height: 260px; }
         }
         @media screen and (max-width: 480px) {
             .navbar { height: 58px; padding: 0 15px; top: 10px; }
-            .logo { font-size: 17px; }
             .logo i { font-size: 20px; }
             .hero { padding: 80px 15px 30px; }
-            .hero-title { font-size: 32px; }
-            .hero-subtitle { font-size: 15px; }
-            .hero-input-group input { width: 160px; height: 42px; font-size: 14px; padding: 0 14px; }
+            .hero-input-group input { height: 42px; padding: 0 14px; font-size: 14px; }
             .btn-primary { height: 42px; padding: 0 20px; font-size: 14px; }
             .hero-image img { max-width: 280px; }
-            .section-title-light { font-size: 28px; }
-            .section-desc-light { font-size: 16px; }
             .btn-secondary { height: 45px; padding: 0 25px; font-size: 16px; }
-            .section-title-dark { font-size: 30px; }
-            .section-desc-dark { font-size: 16px; }
             .btn-pink { height: 42px; padding: 0 25px; font-size: 16px; }
-            .analytics-content h2 { font-size: 26px; }
-            .analytics-content p { font-size: 16px; }
             .btn-analytics { height: 45px; padding: 0 25px; font-size: 16px; }
-            .gallery-header h2 { font-size: 28px; }
-            .gallery-header p { font-size: 16px; }
             .gallery-item { min-width: 160px; height: 220px; }
             .gallery-overlay h3 { font-size: 20px; }
             .gallery-overlay p { font-size: 14px; }
-            .extra-text h2 { font-size: 28px; }
-            .extra-text p { font-size: 16px; }
             .extra-card { padding: 20px; }
-            .extra-card h3 { font-size: 24px; }
-            .extra-card ul { font-size: 16px; }
             .footer-container { grid-template-columns: 1fr 1fr; gap: 30px; }
             .footer-bottom { flex-direction: column; text-align: center; }
             .gallery-wrapper::before,
             .gallery-wrapper::after { width: 30px; }
+        }
+        @media screen and (max-width: 360px) {
+            .gallery-item { min-width: 140px; height: 190px; }
+            .hero-image img { max-width: 230px; }
+            .navbar { padding: 0 12px; }
         }
     </style>
 </head>
@@ -899,7 +913,7 @@
     <!-- Create Section -->
     <section class="section-create section-item" id="create">
         <div class="create-container" data-aos="fade-right">
-            <video src="posd.webm" autoplay loop muted></video>
+            <video src="posd.webm" autoplay loop muted playsinline></video>
             <div class="create-content">
                 <h2 class="section-title-light">Create and<br>customize your<br>Linktree in minutes</h2>
                 <p class="section-desc-light">Connect all your content across social media, websites, stores and more in one link in bio. Customize every detail or let Linktree automatically enhance it to match your brand and drive more clicks.</p>
@@ -918,7 +932,7 @@
                     <button class="btn-pink">Get started for free</button>
                 </div>
                 <div class="share-video">
-                    <video src="The Day Cristiano Ronaldo Showed No Mercy For Sir Alex Ferguson.mp4" autoplay muted loop></video>
+                    <video src="The Day Cristiano Ronaldo Showed No Mercy For Sir Alex Ferguson.mp4" autoplay muted loop playsinline></video>
                 </div>
             </div>
         </div>
